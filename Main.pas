@@ -1,6 +1,6 @@
 {
         PatchMe
-        Copyright © 2014, poxitron
+        Copyright Â© 2014, poxitron
         This file is part of PatchMe.
 
     PatchMe is free software: you can redistribute it and/or modify
@@ -168,13 +168,13 @@ begin
         DragQueryFile(Msg.wParam, FileIndex, @pDroppedFilename, sizeof(pDroppedFilename));
         if Msg.hwnd = Origen_ListBox.Handle then
         begin
-          //comprueba si es un archivo y, si no es un acceso directo, lo añade
+          //comprueba si es un archivo y, si no es un acceso directo, lo aÃ±ade
           if FileExists(PChar(@pDroppedFilename)) and not SameText(ExtractFileExt(PChar(@pDroppedFilename)), '.lnk') then
           begin
             Origen_ListBox.Items.Add(PChar(@pDroppedFilename));
             SetLBScrollExt(Origen_ListBox);
           end;
-          //comprueba si es una carpeta y, si no está vacía, añade su contenido
+          //comprueba si es una carpeta y, si no estÃ¡ vacÃ­a, aÃ±ade su contenido
           if DirectoryExists(PChar(@pDroppedFilename)) and not DirectoryIsEmpty(PChar(@pDroppedFilename)) then
           begin
             FindAll(PChar(@pDroppedFilename) + '\*.*', faArchive, Origen_ListBox.Items);
@@ -184,13 +184,13 @@ begin
         else
         if Msg.hwnd = Destino_ListBox.Handle then
         begin
-          //comprueba si es un archivo y, si no es un acceso directo, lo añade
+          //comprueba si es un archivo y, si no es un acceso directo, lo aÃ±ade
           if FileExists(PChar(@pDroppedFilename)) and not SameText(ExtractFileExt(PChar(@pDroppedFilename)), '.lnk') then
           begin
             Destino_ListBox.Items.Add(PChar(@pDroppedFilename));
             SetLBScrollExt(Destino_ListBox);
           end;
-          //comprueba si es una carpeta y, si no está vacía, añade su contenido
+          //comprueba si es una carpeta y, si no estÃ¡ vacÃ­a, aÃ±ade su contenido
           if DirectoryExists(PChar(@pDroppedFilename)) and not DirectoryIsEmpty(PChar(@pDroppedFilename)) then
           begin
             FindAll(PChar(@pDroppedFilename) + '\*.*', faArchive, Destino_ListBox.Items);
@@ -448,7 +448,7 @@ end;
 {------------------------- Fin de los procedimientos ---------------------------
 -------------------------------------------------------------------------------}
 
-//Carga la configuración al iniciar y más cosas
+//Carga la configuraciÃ³n al iniciar y mÃ¡s cosas
 procedure TForm1.FormCreate(Sender: TObject);
 var
   s: string;
@@ -488,7 +488,7 @@ begin
   end;
 end;
 
-//Guarda la configuración al salir y más cosas
+//Guarda la configuraciÃ³n al salir y mÃ¡s cosas
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   try
@@ -514,7 +514,7 @@ begin
   DragAcceptFiles(Destino_ListBox.Handle, False);
 end;
 
-//Ordena los archivos arrastrándolos
+//Ordena los archivos arrastrÃ¡ndolos
 procedure TForm1.ListBoxDragDrop(Sender, Source: TObject; X, Y: Integer);
 var
   ListBox: TListBox;
@@ -567,7 +567,7 @@ begin
   Accept := Source = Destino_ListBox;
 end;
 
-//Añade archivos de origen al pulsar el botón
+//AÃ±ade archivos de origen al pulsar el botÃ³n
 procedure TForm1.Origen_ButtonClick(Sender: TObject);
 var
   i: Integer;
@@ -584,7 +584,7 @@ begin
   SetLBScrollExt(Origen_ListBox);
 end;
 
-//Añade archivos de destino al pulsar el botón
+//AÃ±ade archivos de destino al pulsar el botÃ³n
 procedure TForm1.Destino_ButtonClick(Sender: TObject);
 var
   i: Integer;
@@ -633,7 +633,7 @@ begin
   SetLBScrollExt(Destino_ListBox);
 end;
 
-//Acción del popup menú para el Origen_listbox
+//AcciÃ³n del popup menÃº para el Origen_listbox
 procedure TForm1.Origen_PopupClick(Sender: TObject);
 var
   i: Integer;
@@ -653,7 +653,7 @@ begin
   end;
 end;
 
-//Acción del popup menú para el Destino_listbox
+//AcciÃ³n del popup menÃº para el Destino_listbox
 procedure TForm1.Destino_PopupClick(Sender: TObject);
 var
   i: Integer;
@@ -673,7 +673,7 @@ begin
   end;
 end;
 
-//Activa y desactiva la compresión de archivos
+//Activa y desactiva la compresiÃ³n de archivos
 procedure TForm1.CompressFiles_CheckBoxClick(Sender: TObject);
 begin
   case CompressFiles_CheckBox.Checked of
@@ -705,10 +705,10 @@ begin
   Parche_SaveDialog.InitialDir := LatestPatchPath;
   Parche_SaveDialog.FileName := ExtractFileName(Parche_SaveDialog.FileName);
   if o <> d then
-    MessageDlg('El número de archivos en origen y destino no coincide.', mtError, [mbOK], 0)
+    MessageDlg('El nÃºmero de archivos en origen y destino no coincide.', mtError, [mbOK], 0)
   else
   if (o = 0) and (d = 0) then
-    MessageDlg('Debes añadir como mínimo un archivo de origen y uno de destino.', mtError, [mbOK], 0)
+    MessageDlg('Debes aÃ±adir como mÃ­nimo un archivo de origen y uno de destino.', mtError, [mbOK], 0)
   else
   if not FileExists(Pchar(RutaEjecutable + '\xdelta.exe')) then
     MessageDlg('El ejecutable xdelta.exe no se encuentra en la misma carpeta que PatchMe.', mtError, [mbOK], 0)
@@ -751,8 +751,4 @@ begin
   end;
 end;
 
-{ DONE 1 : Permitir ordenar los archivos de los listbox con el ratón}
-{ DONE 2 : Hacer que si se arrastra una carpeta no añada los accesos directos }
-{ DONE 3 : Permitir que se redimensione la ventana sin que se descuajaringue todo }
-{ TODO 10 : Añadir la barra negra al arrastrar los items de los Listbox }
 end.
