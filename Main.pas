@@ -1,4 +1,4 @@
-{
+﻿{
         PatchMe
         Copyright © 2014, poxitron
         This file is part of PatchMe.

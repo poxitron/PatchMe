@@ -1,4 +1,4 @@
-{
+Ôªø{
         File: MyFunctions.pas
         License: GPLv3
         This file is part of PatchMe.
@@ -14,14 +14,14 @@ uses
  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Winapi.ShellAPI,
  INIFiles, Vcl.ExtCtrls, Vcl.Buttons, System.Zip, System.UITypes;
 
-function GetAppVersion:string;  // cÛdigo extraÌdo del blog de choirul ihwan
-procedure ExecNewProcess(ProgramName: String; ShowCmd: DWORD; Wait: Boolean);  // cÛdigo de Chris Bray
+function GetAppVersion:string;  // c√≥digo extra√≠do del blog de choirul ihwan
+procedure ExecNewProcess(ProgramName: String; ShowCmd: DWORD; Wait: Boolean);  // c√≥digo de Chris Bray
 function ExtractFileNameOnly(const FileName: string): string;
-function AddLeadingZeroes(const aNumber, Length : integer) : string; // cÛdigo de Zarko Gajic, de la web about.com
-procedure FindAll (const Path: String; Attr: Integer; List: TStrings); // el autor del cÛdigo es desconocido
-procedure FileSearch(const PathName: string; const Extensions: string; var lstFiles: TStringList);  // cÛdigo extraÌdo de http://stackoverflow.com
-function DirectoryIsEmpty(Directory: string): Boolean;  // cÛdigo de RaverJK
-procedure SetLBScrollExt(L: TListBox);  // el autor del cÛdigo es desconocido
+function AddLeadingZeroes(const aNumber, Length : integer) : string; // c√≥digo de Zarko Gajic, de la web about.com
+procedure FindAll (const Path: String; Attr: Integer; List: TStrings); // el autor del c√≥digo es desconocido
+procedure FileSearch(const PathName: string; const Extensions: string; var lstFiles: TStringList);  // c√≥digo extra√≠do de http://stackoverflow.com
+function DirectoryIsEmpty(Directory: string): Boolean;  // c√≥digo de RaverJK
+procedure SetLBScrollExt(L: TListBox);  // el autor del c√≥digo es desconocido
 
 
 implementation
@@ -114,7 +114,7 @@ begin
 //Uso: FindAll(PChar(@pDroppedFilename)+'\*.*',faArchive,Origen_ListBox.Items)
 end;
  
-//Devuelve todos los archivos de una carpeta usando m·scaras
+//Devuelve todos los archivos de una carpeta usando m√°scaras
 procedure FileSearch(const PathName: string; const Extensions: string; var lstFiles: TStringList);
 const
   FileMask = '*.*';
@@ -146,7 +146,7 @@ begin
 //Uso: FileSearch('C:\Temp', '.txt;.tmp;.exe;.doc', FileList);
 end;
 
-//Comprueba si el directorio est· vacÌo
+//Comprueba si el directorio est√° vac√≠o
 function DirectoryIsEmpty(Directory: string): Boolean;
 var
   SR: TSearchRec;
@@ -160,7 +160,7 @@ begin
   FindClose(SR);
 end;
 
-//Muestra autom·ticamente la barra horizontal del Listbox
+//Muestra autom√°ticamente la barra horizontal del Listbox
 procedure SetLBScrollExt(L: TListBox);
 var
   i, max, x : integer;
