@@ -122,7 +122,7 @@ var
   Rec: TSearchRec;
   Path: string;
 begin
-  Path := IncludeTrailingBackslash(PathName);
+  Path := IncludeTrailingPathDelimiter(PathName);
   if FindFirst(Path + FileMask, faAnyFile - faDirectory, Rec) = 0 then
     try
       repeat
