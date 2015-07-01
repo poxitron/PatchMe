@@ -180,8 +180,7 @@ begin
             FindAll(PChar(@pDroppedFilename) + '\*.*', faArchive, Origen_ListBox.Items);
             SetLBScrollExt(Origen_ListBox);
           end;
-        end
-        else
+        end;
         if Msg.hwnd = Destino_ListBox.Handle then
         begin
           //comprueba si es un archivo y, si no es un acceso directo, lo añade
@@ -196,7 +195,7 @@ begin
             FindAll(PChar(@pDroppedFilename) + '\*.*', faArchive, Destino_ListBox.Items);
             SetLBScrollExt(Destino_ListBox);
           end;
-        end
+        end;
       end;
     finally
       DragFinish(Msg.wParam);
