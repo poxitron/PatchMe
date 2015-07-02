@@ -17,7 +17,7 @@
     along with PatchMe.  If not, see <http://www.gnu.org/licenses/>.
 }
 
-unit Main;
+unit frmPatchMe;
 
 interface
 

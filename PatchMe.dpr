@@ -2,7 +2,7 @@ program PatchMe;
 
 uses
   Vcl.Forms,
-  Main in 'Main.pas' {Form1},
+  frmPatchMe in 'frmPatchMe.pas' {Form1},
   MyFunctions in 'MyFunctions.pas';
 
 {$R *.res}

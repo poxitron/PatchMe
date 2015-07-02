@@ -82,8 +82,8 @@
         <VerInfo_Release>6</VerInfo_Release>
         <VerInfo_MinorVer>9</VerInfo_MinorVer>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
-        <DCC_ExeOutput>C:\Users\poxitron\Desktop\$(Config)</DCC_ExeOutput>
-        <DCC_DcuOutput>C:\Users\poxitron\Desktop\$(Config)\Unit</DCC_DcuOutput>
+        <DCC_ExeOutput>C:\Users\poxitron\Desktop\$(Config)\PatchMe</DCC_ExeOutput>
+        <DCC_DcuOutput>C:\Users\poxitron\Desktop\$(Config)\PatchMe\Unit</DCC_DcuOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1034</VerInfo_Locale>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
@@ -102,14 +102,14 @@
         <VerInfo_MinorVer>9</VerInfo_MinorVer>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_DcuOutput>C:\Users\poxitron\Desktop\$(Config)\Unit</DCC_DcuOutput>
-        <DCC_ExeOutput>C:\Users\poxitron\Desktop\$(Config)</DCC_ExeOutput>
+        <DCC_DcuOutput>C:\Users\poxitron\Desktop\$(Config)\PatchMe\Unit</DCC_DcuOutput>
+        <DCC_ExeOutput>C:\Users\poxitron\Desktop\$(Config)\PatchMe</DCC_ExeOutput>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Main.pas">
+        <DCCReference Include="frmPatchMe.pas">
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
@@ -148,13 +148,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\Desktop\Debug\PatchMe.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\PatchMe.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>PatchMe.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\PatchMe.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\..\Desktop\Debug\PatchMe.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>PatchMe.exe</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -483,14 +483,14 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>
