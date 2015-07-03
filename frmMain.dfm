@@ -50,7 +50,6 @@ object Form1: TForm1
     0000000000000000000000000000000000000000000000000000000000000000
     000000000000000000000000000000000000000000000000000000000000}
   OldCreateOrder = False
-  Position = poDefault
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -79,7 +78,7 @@ object Form1: TForm1
       end
       item
         Column = 0
-        Control = Panel_cantral
+        Control = Panel_Central
         Row = 2
       end
       item
@@ -94,7 +93,7 @@ object Form1: TForm1
       end
       item
         Column = 0
-        Control = Panel_inferior
+        Control = Panel_Inferior
         Row = 5
       end>
     RowCollection = <
@@ -160,7 +159,7 @@ object Form1: TForm1
       OnDragDrop = ListBoxDragDrop
       OnDragOver = Origen_ListBoxDragOver
     end
-    object Panel_cantral: TPanel
+    object Panel_Central: TPanel
       AlignWithMargins = True
       Left = 16
       Top = 174
@@ -253,7 +252,7 @@ object Form1: TForm1
       OnDragDrop = ListBoxDragDrop
       OnDragOver = Destino_ListBoxDragOver
     end
-    object Panel_inferior: TPanel
+    object Panel_Inferior: TPanel
       AlignWithMargins = True
       Left = 16
       Top = 386
@@ -342,7 +341,7 @@ object Form1: TForm1
         State = cbChecked
         TabOrder = 1
       end
-      object Panel1: TPanel
+      object Panel_Buffer: TPanel
         Left = 166
         Top = 4
         Width = 120

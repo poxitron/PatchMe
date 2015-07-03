@@ -109,7 +109,7 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="frmPatchMe.pas">
+        <DCCReference Include="frmMain.pas">
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>

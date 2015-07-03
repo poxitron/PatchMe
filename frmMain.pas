@@ -17,7 +17,7 @@
     along with PatchMe.  If not, see <http://www.gnu.org/licenses/>.
 }
 
-unit frmPatchMe;
+unit frmMain;
 
 interface
 
@@ -49,8 +49,8 @@ type
     Origen_ListBox: TListBox;
     Origen_OpenDialog: TOpenDialog;
     Origen_PopupMenu: TPopupMenu;
-    Panel1: TPanel;
-    Panel_cantral: TPanel;
+    Panel_Buffer: TPanel;
+    Panel_Central: TPanel;
     Parche_SaveDialog: TSaveDialog;
     SelecAll_Origen: TMenuItem;
     SeleccAll_Destino: TMenuItem;
@@ -59,7 +59,7 @@ type
     Sort_Destino: TMenuItem;
     Sort_Origen: TMenuItem;
     GridPanel1: TGridPanel;
-    Panel_inferior: TPanel;
+    Panel_Inferior: TPanel;
     xdeltaFileNames_CheckBox: TCheckBox;
     xdeltaFileNamesOriegn_Label: TLabel;
     xdeltaFileNamesDestino_Label: TLabel;
@@ -480,8 +480,6 @@ begin
     Form1.Left := INI.ReadInteger('Position', 'Left', Screen.DesktopWidth div 2 - 250);
     Form1.Width := INI.ReadInteger('Position', 'Width', 500);
     Form1.Height := INI.ReadInteger('Position', 'Height', 520);
-    Crear_Button.Left := Panel_inferior.Width - 75;
-    Panel1.Left := Panel_inferior.Width div 2 - 50;
   finally
     INI.Free;
   end;
