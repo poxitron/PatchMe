@@ -165,13 +165,16 @@ procedure SetLBScrollExt(L: TListBox);
 var
   i, max, x : integer;
 begin
-  if L.Items.Count = 0 then max := -10
+  if L.Items.Count = 0 then
+    max := -10
   else
+  begin
+    max := 0;
+    for i := 0 to L.Items.Count -1 do
     begin
-      max := 0;
-      for i := 0 to L.Items.Count -1 do begin
       x := L.Canvas.TextWidth(L.Items[i]);
-      if x > max then max := x;
+      if x > max then
+        max := x;
     end;
   end;
   Inc(max,6);

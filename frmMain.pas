@@ -635,8 +635,6 @@ procedure TForm1.Origen_PopupClick(Sender: TObject);
 var
   i: Integer;
 begin
-  for I := 0 to (Origen_ListBox.Items.Count - 1) do
-  begin
     case (Sender as TMenuItem).Tag of
       1: //ordenar por nombre
       begin
@@ -644,10 +642,15 @@ begin
         Origen_ListBox.Sorted := True;
         DragAcceptFiles(Origen_ListBox.Handle, True);
       end;
-      2: Origen_ListBox.Selected[i] := True;  //seleccionar todo
-      3: Origen_ListBox.Selected[i] := False; //deseleccionar todo
+      2: begin //seleccionar todo
+         for I := 0 to (Origen_ListBox.Items.Count - 1) do
+           Origen_ListBox.Selected[i] := True;
+         end;
+      3: begin //deseleccionar todo
+         for I := 0 to (Origen_ListBox.Items.Count - 1) do
+           Origen_ListBox.Selected[i] := False;
+         end;
     end;
-  end;
 end;
 
 //Acción del popup menú para el Destino_listbox
@@ -655,8 +658,6 @@ procedure TForm1.Destino_PopupClick(Sender: TObject);
 var
   i: Integer;
 begin
-  for I := 0 to (Destino_ListBox.Items.Count - 1) do
-  begin
     case (Sender as TMenuItem).Tag of
       1: //ordenar por nombre
       begin
@@ -664,10 +665,15 @@ begin
         Destino_ListBox.Sorted := True;
         DragAcceptFiles(Destino_ListBox.Handle, True);
       end;
-      2: Destino_ListBox.Selected[i] := True;  //seleccionar todo
-      3: Destino_ListBox.Selected[i] := False; //deseleccionar todo
+      2: begin //seleccionar todo
+         for I := 0 to (Destino_ListBox.Items.Count - 1) do
+           Destino_ListBox.Selected[i] := True;
+         end;
+      3: begin //deseleccionar todo
+         for I := 0 to (Destino_ListBox.Items.Count - 1) do
+           Destino_ListBox.Selected[i] := False;
+         end;
     end;
-  end;
 end;
 
 //Activa y desactiva la compresión de archivos
