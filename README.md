@@ -9,11 +9,11 @@ PatchMe es un sencillo interfaz gráfico para Windows que utiliza [xdelta3] (htt
 4. En la ventana que aparecerá elige el lugar y el nombre que tendrán los archivos .sh, .bat y .zip.
 
 ```
-Se puede pulsar con el botón derecho del ratón en ambas cajas para acceder a un menú contextual
-con varias opciones.
+Se puede pulsar con el botón derecho del ratón en ambas cajas para acceder
+a un menú contextual con varias opciones.
 
-Tanto la posición como el tamaño de la ventana y las rutas que se han usadopara añadir y guardar
-los archivos se guardarán al cerrar la aplicación.
+Tanto la posición como el tamaño de la ventana y las rutas que se han usado para
+añadir y guardar los archivos se guardarán al cerrar la aplicación.
 ```
 
 
