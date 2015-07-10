@@ -55,3 +55,11 @@ __history/
 
 # Castalia statistics file
 *.stat
+
+# Compressed files
+*.zip
+*.7zip
+*.rar
+
+# Other files
+/images
