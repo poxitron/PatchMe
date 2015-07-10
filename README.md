@@ -1,6 +1,8 @@
 ### PatchMe ###
 PatchMe es un sencillo interfaz gráfico para Windows que utiliza [xdelta3] (https://github.com/jmacd/xdelta) para crear parches para más de un archivo a la vez, y ha sido creado por un tipo que no tiene ni idea de programación. ¡Huid, insensatos!
 
+![Screenshot](Resources/screenshot.png)
+
 ##### Uso #####
 1. Añadir los archivos originales en la caja "Archivos de origen".
 2. Añadir los archivos modificados o finales en la caja "Archivos de destino".
