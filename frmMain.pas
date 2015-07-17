@@ -172,14 +172,13 @@ begin
           if FileExists(PChar(@pDroppedFilename)) and not SameText(ExtractFileExt(PChar(@pDroppedFilename)), '.lnk') then
           begin
             Origen_ListBox.Items.Add(PChar(@pDroppedFilename));
-            SetLBScrollExt(Origen_ListBox);
           end;
           //comprueba si es una carpeta y, si no está vacía, añade su contenido
           if DirectoryExists(PChar(@pDroppedFilename)) and not DirectoryIsEmpty(PChar(@pDroppedFilename)) then
           begin
             FindAll(PChar(@pDroppedFilename) + '\*.*', faArchive, Origen_ListBox.Items);
-            SetLBScrollExt(Origen_ListBox);
           end;
+          SetLBScrollExt(Origen_ListBox);
         end;
         if Msg.hwnd = Destino_ListBox.Handle then
         begin
@@ -187,14 +186,13 @@ begin
           if FileExists(PChar(@pDroppedFilename)) and not SameText(ExtractFileExt(PChar(@pDroppedFilename)), '.lnk') then
           begin
             Destino_ListBox.Items.Add(PChar(@pDroppedFilename));
-            SetLBScrollExt(Destino_ListBox);
           end;
           //comprueba si es una carpeta y, si no está vacía, añade su contenido
           if DirectoryExists(PChar(@pDroppedFilename)) and not DirectoryIsEmpty(PChar(@pDroppedFilename)) then
           begin
             FindAll(PChar(@pDroppedFilename) + '\*.*', faArchive, Destino_ListBox.Items);
-            SetLBScrollExt(Destino_ListBox);
           end;
+          SetLBScrollExt(Destino_ListBox);
         end;
       end;
     finally
