@@ -211,34 +211,24 @@ begin
   n := 0;
   b := StrToInt(Form1.Buffer_ComboBox.Text) * 1048576;
   buffer := '-B' + IntToStr(b);
-  try
-    if Form1.xdeltaFileNames_CheckBox.Checked then
-    begin //Genera el archivo .xdelta con el nombre del archivo de destino
-      for i := 0 to Form1.Origen_ListBox.items.count - 1 do
-      begin
-        ArchivoOrigen := Form1.Origen_ListBox.Items.Strings[i];
-        ArchivoDestino := Form1.Destino_ListBox.Items.Strings[i];
-        case Form1.xdeltaFileNamesDestino_Label.Visible of
-          True: Archivoxdelta := RutaParche + ExtractFileNameOnly(ArchivoDestino) + '.xdelta';
-          False: Archivoxdelta := RutaParche + ExtractFileNameOnly(ArchivoOrigen) + '.xdelta';
-        end;
-        parametros := buffer + ' -f -e -s "' + ArchivoOrigen + '" "' + ArchivoDestino + '" "' + Archivoxdelta + '"';
-        ExecNewProcess(RutaEjecutable + '\xdelta.exe ' + parametros, SW_HIDE, True);
-      end;
-    end
-    else
-    begin //Genera el archivo .xdelta con el nombre file01.xdelta
-      for i := 0 to Form1.Origen_ListBox.items.count - 1 do
-      begin
-        inc(n);
-        ArchivoOrigen := Form1.Origen_ListBox.Items.Strings[i];
-        ArchivoDestino := Form1.Destino_ListBox.Items.Strings[i];
-        Archivoxdelta := RutaParche + 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
-        parametros := buffer + ' -f -e -s "' + ArchivoOrigen + '" "' + ArchivoDestino + '" "' + Archivoxdelta + '"';
-        ExecNewProcess(RutaEjecutable + '\xdelta.exe ' + parametros, SW_HIDE, True);
-      end;
+  for i := 0 to Form1.Origen_ListBox.Items.Count - 1 do
+  begin
+    ArchivoOrigen := Form1.Origen_ListBox.Items.Strings[i];
+    ArchivoDestino := Form1.Destino_ListBox.Items.Strings[i];
+    case Form1.xdeltaFileNames_CheckBox.Checked of
+      True: begin
+              case Form1.xdeltaFileNamesDestino_Label.Visible of
+                True: Archivoxdelta := RutaParche + ExtractFileNameOnly(ArchivoDestino) + '.xdelta';
+                False: Archivoxdelta := RutaParche + ExtractFileNameOnly(ArchivoOrigen) + '.xdelta';
+              end;
+            end;
+      False: begin
+               inc(n);
+               Archivoxdelta := RutaParche + 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
+             end;
     end;
-  finally
+    parametros := buffer + ' -f -e -s "' + ArchivoOrigen + '" "' + ArchivoDestino + '" "' + Archivoxdelta + '"';
+    ExecNewProcess(RutaEjecutable + '\xdelta.exe ' + parametros, SW_HIDE, True);
   end;
 end;
 
@@ -256,37 +246,26 @@ begin
     AStringList.Add('chcp 65001>NUL');
     AStringList.Add('echo Archivo generado con PatchMe' + GetAppVersion);
     AStringList.Add('echo.');
-    if Form1.xdeltaFileNames_CheckBox.Checked then
+    for i := 0 to Form1.Origen_ListBox.items.count - 1 do
     begin
-      for i := 0 to Form1.Origen_ListBox.items.count - 1 do
-      begin
-        ArchivoOrigen := ExtractFileName(Form1.Origen_ListBox.Items.Strings[i]);
-        ArchivoDestino := ExtractFileName(Form1.Destino_ListBox.Items.Strings[i]);
-        case Form1.xdeltaFileNamesDestino_Label.Visible of
-          True: Archivoxdelta := ExtractFileNameOnly(ArchivoDestino) + '.xdelta';
-          False: Archivoxdelta := ExtractFileNameOnly(ArchivoOrigen) + '.xdelta';
-        end;
-        AStringList.Add('if not exist "' + ArchivoOrigen + '" goto nofile');
-        AStringList.Add('echo Parcheando el archivo: ' + ArchivoOrigen);
-        AStringList.Add('xdelta.exe -f -d -s "' + ArchivoOrigen + '" "' + Archivoxdelta + '" "' + ArchivoDestino + '"');
-        AStringList.Add('echo Parche aplicado.');
-        AStringList.Add('echo.');
+      ArchivoOrigen := ExtractFileName(Form1.Origen_ListBox.Items.Strings[i]);
+      ArchivoDestino := ExtractFileName(Form1.Destino_ListBox.Items.Strings[i]);
+      case Form1.xdeltaFileNames_CheckBox.Checked of
+      True: begin
+              case Form1.xdeltaFileNamesDestino_Label.Visible of
+                True: Archivoxdelta := ExtractFileNameOnly(ArchivoDestino) + '.xdelta';
+                False: Archivoxdelta := ExtractFileNameOnly(ArchivoOrigen) + '.xdelta';
+              end;
+            end;
+      False: begin
+               inc(n);
+               Archivoxdelta := 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
+             end;
       end;
-    end
-    else
-    begin
-      for i := 0 to Form1.Origen_ListBox.items.count - 1 do
-      begin
-        inc(n);
-        ArchivoOrigen := ExtractFileName(Form1.Origen_ListBox.Items.Strings[i]);
-        ArchivoDestino := ExtractFileName(Form1.Destino_ListBox.Items.Strings[i]);
-        Archivoxdelta := 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
-        AStringList.Add('if not exist "' + ArchivoOrigen + '" goto nofile');
-        AStringList.Add('echo Parcheando el archivo: ' + ArchivoOrigen);
-        AStringList.Add('xdelta.exe -f -d -s "' + ArchivoOrigen + '" "' + Archivoxdelta + '" "' + ArchivoDestino + '"');
-        AStringList.Add('echo Parche aplicado.');
-        AStringList.Add('echo.');
-      end;
+      AStringList.Add('if not exist "' + ArchivoOrigen + '" goto nofile');
+      AStringList.Add('echo Parcheando el archivo: ' + ArchivoOrigen);
+      AStringList.Add('xdelta.exe -f -d -s "' + ArchivoOrigen + '" "' + Archivoxdelta + '" "' + ArchivoDestino + '"');
+      AStringList.Add('echo.');
     end;
     AStringList.Add('echo Proceso finalizado.');
     AStringList.Add('pause');
@@ -319,45 +298,30 @@ begin
     AStringList.Add('  echo "No se encuentra el ejecutable de xdelta. Saliendo."');
     AStringList.Add('  exit -1');
     AStringList.Add('else');
-    if Form1.xdeltaFileNames_CheckBox.Checked then
+    for i := 0 to Form1.Origen_ListBox.items.count - 1 do
     begin
-      for i := 0 to Form1.Origen_ListBox.items.count - 1 do
-      begin
-        ArchivoOrigen := ExtractFileName(Form1.Origen_ListBox.Items.Strings[i]);
-        ArchivoDestino := ExtractFileName(Form1.Destino_ListBox.Items.Strings[i]);
-        case Form1.xdeltaFileNamesDestino_Label.Visible of
-          True: Archivoxdelta := ExtractFileNameOnly(ArchivoDestino) + '.xdelta';
-          False: Archivoxdelta := ExtractFileNameOnly(ArchivoOrigen) + '.xdelta';
-        end;
-        AStringList.Add('if [[ ! -f "' + ArchivoOrigen + '" ]]; then');
-        AStringList.Add('  echo "No se encuentra el fichero de origen: ' + ArchivoOrigen + '"');
-        AStringList.Add('  exit -1');
-        AStringList.Add('fi');
-        AStringList.Add('');
-        AStringList.Add('echo "Parcheando el archivo: ' + ArchivoOrigen + '"');
-        AStringList.Add('xdelta3 -f -d -s "' + ArchivoOrigen + '" "' + Archivoxdelta + '" "' + ArchivoDestino + '"');
-        AStringList.Add('echo "Parche aplicado."');
-        AStringList.Add('');
+      ArchivoOrigen := ExtractFileName(Form1.Origen_ListBox.Items.Strings[i]);
+      ArchivoDestino := ExtractFileName(Form1.Destino_ListBox.Items.Strings[i]);
+      case Form1.xdeltaFileNames_CheckBox.Checked of
+        True: begin
+                case Form1.xdeltaFileNamesDestino_Label.Visible of
+                  True: Archivoxdelta := ExtractFileNameOnly(ArchivoDestino) + '.xdelta';
+                  False: Archivoxdelta := ExtractFileNameOnly(ArchivoOrigen) + '.xdelta';
+                end;
+              end;
+        False: begin
+                 inc(n);
+                 Archivoxdelta := 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
+               end;
       end;
-    end
-    else
-    begin
-      for i := 0 to Form1.Origen_ListBox.items.count - 1 do
-      begin
-        inc(n);
-        ArchivoOrigen := ExtractFileName(Form1.Origen_ListBox.Items.Strings[i]);
-        ArchivoDestino := ExtractFileName(Form1.Destino_ListBox.Items.Strings[i]);
-        Archivoxdelta := 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
-        AStringList.Add('if [[ ! -f "' + ArchivoOrigen + '" ]]; then');
-        AStringList.Add('  echo "No se encuentra el fichero de origen: ' + ArchivoOrigen + '"');
-        AStringList.Add('  exit -1');
-        AStringList.Add('fi');
-        AStringList.Add('');
-        AStringList.Add('echo "Parcheando el archivo: ' + ArchivoOrigen + '"');
-        AStringList.Add('xdelta3 -f -d -s "' + ArchivoOrigen + '" "' + Archivoxdelta + '" "' + ArchivoDestino + '"');
-        AStringList.Add('echo "Parche aplicado."');
-        AStringList.Add('');
-      end;
+      AStringList.Add('if [[ ! -f "' + ArchivoOrigen + '" ]]; then');
+      AStringList.Add('  echo "No se encuentra el fichero de origen: ' + ArchivoOrigen + '"');
+      AStringList.Add('  exit -1');
+      AStringList.Add('fi');
+      AStringList.Add('');
+      AStringList.Add('echo "Parcheando el archivo: ' + ArchivoOrigen + '"');
+      AStringList.Add('xdelta3 -f -d -s "' + ArchivoOrigen + '" "' + Archivoxdelta + '" "' + ArchivoDestino + '"');
+      AStringList.Add('');
     end;
     AStringList.Add('echo "Proceso finalizado."');
     AStringList.Add('fi');
@@ -380,25 +344,21 @@ begin
   try
     AZipper := TZipFile.Create;
     AZipper.Open(RutaParche + NombreParche + '.zip', zmWrite);
-    if Form1.xdeltaFileNames_CheckBox.Checked then
+    for i := 0 to Form1.Origen_ListBox.items.count - 1 do
     begin
-      for i := 0 to Form1.Origen_ListBox.items.count - 1 do
-      begin
-        case Form1.xdeltaFileNamesDestino_Label.Visible of
-          True: Archivoxdelta := ExtractFileNameOnly(Form1.Destino_ListBox.Items.Strings[i]) + '.xdelta';
-          False: Archivoxdelta := ExtractFileNameOnly(Form1.Origen_ListBox.Items.Strings[i]) + '.xdelta';
-        end;
-        AZipper.Add(RutaParche + Archivoxdelta, Archivoxdelta);
+      case Form1.xdeltaFileNames_CheckBox.Checked of
+        True: begin
+                case Form1.xdeltaFileNamesDestino_Label.Visible of
+                  True: Archivoxdelta := ExtractFileNameOnly(Form1.Destino_ListBox.Items.Strings[i]) + '.xdelta';
+                  False: Archivoxdelta := ExtractFileNameOnly(Form1.Origen_ListBox.Items.Strings[i]) + '.xdelta';
+                end;
+              end;
+        False: begin
+                 inc(n);
+                 Archivoxdelta := 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
+               end;
       end;
-    end
-    else
-    begin
-      for i := 0 to Form1.Origen_ListBox.items.count - 1 do
-      begin
-        inc(n);
-        Archivoxdelta := 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
-        AZipper.Add(RutaParche + Archivoxdelta, Archivoxdelta);
-      end;
+      AZipper.Add(RutaParche + Archivoxdelta, Archivoxdelta);
     end;
     AZipper.Add(RutaParche + 'xdelta.exe');
     AZipper.Add(RutaParche + NombreParche + '.bat');
@@ -415,32 +375,25 @@ var
   i, n: integer;
 begin
   n := 0;
-  try
-    if Form1.xdeltaFileNames_CheckBox.Checked then
-    begin
-      for i := 0 to Form1.Origen_ListBox.items.count - 1 do
-      begin
-        case Form1.xdeltaFileNamesDestino_Label.Visible of
-          True: Archivoxdelta := ExtractFileNameOnly(Form1.Destino_ListBox.Items.Strings[i]) + '.xdelta';
-          False: Archivoxdelta := ExtractFileNameOnly(Form1.Origen_ListBox.Items.Strings[i]) + '.xdelta';
-        end;
-        DeleteFile(RutaParche + Archivoxdelta);
-      end;
-    end
-    else
-    begin
-      for i := 0 to Form1.Origen_ListBox.items.count - 1 do
-      begin
-        inc(n);
-        Archivoxdelta := 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
-        DeleteFile(RutaParche + Archivoxdelta);
-      end;
+  for i := 0 to Form1.Origen_ListBox.items.count - 1 do
+  begin
+    case Form1.xdeltaFileNames_CheckBox.Checked of
+      True: begin
+              case Form1.xdeltaFileNamesDestino_Label.Visible of
+                True: Archivoxdelta := ExtractFileNameOnly(Form1.Destino_ListBox.Items.Strings[i]) + '.xdelta';
+                False: Archivoxdelta := ExtractFileNameOnly(Form1.Origen_ListBox.Items.Strings[i]) + '.xdelta';
+              end;
+            end;
+      False: begin
+              inc(n);
+              Archivoxdelta := 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
+             end;
     end;
-    DeleteFile(RutaParche + 'xdelta.exe');
-    DeleteFile(RutaParche + NombreParche + '.bat');
-    DeleteFile(RutaParche + NombreParche + '.sh');
-  finally
+    DeleteFile(RutaParche + Archivoxdelta);
   end;
+  DeleteFile(RutaParche + 'xdelta.exe');
+  DeleteFile(RutaParche + NombreParche + '.bat');
+  DeleteFile(RutaParche + NombreParche + '.sh');
 end;
 {------------------------- Fin de los procedimientos ---------------------------
 -------------------------------------------------------------------------------}
@@ -509,7 +462,7 @@ begin
   DragAcceptFiles(Destino_ListBox.Handle, False);
 end;
 
-//Ordena los archivos arrastrándolos
+//Ordena los archivos arrastrándolos con el ratón
 procedure TForm1.ListBoxDragDrop(Sender, Source: TObject; X, Y: Integer);
 var
   ListBox: TListBox;
@@ -522,31 +475,28 @@ begin
   if TargetIndex <> -1 then
   begin
     SelectedItems := TStringList.Create;
+    ListBox.Items.BeginUpdate;
     try
-      ListBox.Items.BeginUpdate;
-      try
-        for i := ListBox.Items.Count - 1 downto 0 do
+      for i := ListBox.Items.Count - 1 downto 0 do
+      begin
+        if ListBox.Selected[i] then
         begin
-          if ListBox.Selected[i] then
-          begin
-            SelectedItems.AddObject(ListBox.Items[i], ListBox.Items.Objects[i]);
-            ListBox.Items.Delete(i);
-            if i < TargetIndex then
-              dec(TargetIndex);
-          end;
+          SelectedItems.AddObject(ListBox.Items[i], ListBox.Items.Objects[i]);
+          ListBox.Items.Delete(i);
+          if i < TargetIndex then
+            dec(TargetIndex);
         end;
-        for i := SelectedItems.Count - 1 downto 0 do
-        begin
-          ListBox.Items.InsertObject(TargetIndex, SelectedItems[i], SelectedItems.Objects[i]);
-          ListBox.Selected[TargetIndex] := True;
-          inc(TargetIndex);
-        end;
-      finally
-        ListBox.Items.EndUpdate;
+      end;
+      for i := SelectedItems.Count - 1 downto 0 do
+      begin
+        ListBox.Items.InsertObject(TargetIndex, SelectedItems[i], SelectedItems.Objects[i]);
+        ListBox.Selected[TargetIndex] := True;
+        inc(TargetIndex);
       end;
     finally
-      SelectedItems.Free;
+      ListBox.Items.EndUpdate;
     end;
+    SelectedItems.Free;
   end;
 end;
 
@@ -604,18 +554,18 @@ begin
   for i := Origen_ListBox.Items.Count - 1 downto 0 do
   begin
     if Origen_ListBox.Selected[i] then
-      begin
-        Origen_ListBox.Items.Delete(i);
-        SetLBScrollExt(Origen_ListBox);
-      end;
+    begin
+      Origen_ListBox.Items.Delete(i);
+      SetLBScrollExt(Origen_ListBox);
+    end;
   end;
   for i := Destino_ListBox.Items.Count - 1 downto 0 do
   begin
     if Destino_ListBox.Selected[i] then
-      begin
-        Destino_ListBox.Items.Delete(i);
-        SetLBScrollExt(Destino_ListBox);
-      end;
+    begin
+      Destino_ListBox.Items.Delete(i);
+      SetLBScrollExt(Destino_ListBox);
+    end;
   end;
 end;
 
@@ -634,19 +584,18 @@ var
   i: Integer;
 begin
     case (Sender as TMenuItem).Tag of
-      1: //ordenar por nombre
-      begin
-        Origen_ListBox.Sorted := False;
-        Origen_ListBox.Sorted := True;
-        DragAcceptFiles(Origen_ListBox.Handle, True);
-      end;
+      1: begin //ordenar por nombre
+          Origen_ListBox.Sorted := False;
+          Origen_ListBox.Sorted := True;
+          DragAcceptFiles(Origen_ListBox.Handle, True);
+         end;
       2: begin //seleccionar todo
-         for I := 0 to (Origen_ListBox.Items.Count - 1) do
-           Origen_ListBox.Selected[i] := True;
+           for I := 0 to (Origen_ListBox.Items.Count - 1) do
+             Origen_ListBox.Selected[i] := True;
          end;
       3: begin //deseleccionar todo
-         for I := 0 to (Origen_ListBox.Items.Count - 1) do
-           Origen_ListBox.Selected[i] := False;
+           for I := 0 to (Origen_ListBox.Items.Count - 1) do
+             Origen_ListBox.Selected[i] := False;
          end;
     end;
 end;
@@ -657,19 +606,18 @@ var
   i: Integer;
 begin
     case (Sender as TMenuItem).Tag of
-      1: //ordenar por nombre
-      begin
-        Destino_ListBox.Sorted := False;
-        Destino_ListBox.Sorted := True;
-        DragAcceptFiles(Destino_ListBox.Handle, True);
-      end;
+      1: begin //ordenar por nombre
+           Destino_ListBox.Sorted := False;
+           Destino_ListBox.Sorted := True;
+           DragAcceptFiles(Destino_ListBox.Handle, True);
+         end;
       2: begin //seleccionar todo
-         for I := 0 to (Destino_ListBox.Items.Count - 1) do
-           Destino_ListBox.Selected[i] := True;
+           for I := 0 to (Destino_ListBox.Items.Count - 1) do
+             Destino_ListBox.Selected[i] := True;
          end;
       3: begin //deseleccionar todo
-         for I := 0 to (Destino_ListBox.Items.Count - 1) do
-           Destino_ListBox.Selected[i] := False;
+           for I := 0 to (Destino_ListBox.Items.Count - 1) do
+             Destino_ListBox.Selected[i] := False;
          end;
     end;
 end;
@@ -719,9 +667,10 @@ begin
     LatestPatchPath := ExtractFilePath(Parche_SaveDialog.FileName);
     try
       AThread := TMyThread.Create(True);
-      AThread.FreeOnTerminate := true;
+      AThread.FreeOnTerminate := True;
       AThread.Start;
     finally
+
     end;
   end;
 end;
@@ -741,7 +690,7 @@ begin
       Form1.Estado_Label.Caption := 'Estado: Comprimiendo los archivos...';
       ComprimirArchivos;
     end;
-    if Form1.DeleteFiles_CheckBox.Checked and Form1.DeleteFiles_CheckBox.Enabled then
+    if Form1.CompressFiles_CheckBox.Checked and Form1.DeleteFiles_CheckBox.Checked then
     begin
       Form1.Estado_Label.Caption := 'Estado: Borrando los archivos intermedios...';
       BorrarArchivos;
