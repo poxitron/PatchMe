@@ -21,6 +21,6 @@ añadir y guardar los archivos se guardarán al cerrar la aplicación.
 
 ##### Opciones #####
 - `Comprimir archivos en zip:` Todos los archivos generados se comprimirán en un archivo .zip al terminar el proceso.
-- `Borrar los archivos intermedios:` Los archivos generados se borrarán después de comprimirse en .zip.
+- `Borrar los archivos intermedios:` Los archivos generados se borrarán después de comprimirse en .zip, evitando así tener que hacerlo manualmente.
 - `Usar nombre para .xdelta:` Si está desactivado, los archivos .xdelta tendrán el nombre "fileX.xdelta", donde X es un número. Si está activado, el nombre de los archivos será el mismo que el de los archivos de origen o destino.
 - `Búfer:` Especifica el "horizonte" máximo por el que xdelta buscará diferencias entre los dos archivos. Para una información más detallada, visita este [enlace] (https://github.com/jmacd/xdelta/blob/wiki/TuningMemoryBudget.md).
