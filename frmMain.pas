@@ -646,7 +646,7 @@ end;
 //Ejecuta el hilo, y este todo el proceso
 procedure TForm1.Crear_ButtonClick(Sender: TObject);
 var
-  o, d: integer;
+  i, o, d: integer;
   AThread: TMyThread;
 begin
   o := Origen_ListBox.Items.Count;
@@ -661,6 +661,12 @@ begin
   else
   if not FileExists(Pchar(RutaEjecutable + '\xdelta.exe')) then
     MessageDlg('El ejecutable xdelta.exe no se encuentra en la misma carpeta que PatchMe.', mtError, [mbOK], 0)
+  else
+  if Buffer_ComboBox.Text = '0' then
+    MessageDlg('El búfer deber tener un valor mayor que 0.', mtError, [mbOK], 0)
+  else
+  if not TryStrToInt(Buffer_ComboBox.Text, i) then
+     MessageDlg('El búfer deber ser un número entero.', mtError, [mbOK], 0)
   else
   if Parche_SaveDialog.Execute then
   begin
