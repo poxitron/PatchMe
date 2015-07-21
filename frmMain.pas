@@ -206,7 +206,7 @@ end;
 procedure Ejecutarxdelta;
 var
   b, i, n: integer;
-  buffer, parametros, ejecutable: String;
+  buffer, parametros: String;
 begin
   n := 0;
   b := StrToInt(Form1.Buffer_ComboBox.Text) * 1048576;
@@ -227,8 +227,8 @@ begin
                Archivoxdelta := RutaParche + 'file' + AddLeadingZeroes(n, 2) + '.xdelta';
              end;
     end;
-    parametros := buffer + ' -f -e -s "' + ArchivoOrigen + '" "' + ArchivoDestino + '" "' + Archivoxdelta + '"';
-    ExecNewProcess(RutaEjecutable + '\xdelta.exe ' + parametros, SW_HIDE, True);
+    parametros := Format('%s',[RutaEjecutable + '\xdelta.exe ' + buffer + ' -f -e -s "' + ArchivoOrigen + '" "' + ArchivoDestino + '" "' + Archivoxdelta + '"']);
+    ExecNewProcess(parametros, SW_HIDE, True);
   end;
 end;
 
@@ -264,7 +264,7 @@ begin
       end;
       AStringList.Add('if not exist "' + ArchivoOrigen + '" goto nofile');
       AStringList.Add('echo Parcheando el archivo: ' + ArchivoOrigen);
-      AStringList.Add('xdelta.exe -f -d -s "' + ArchivoOrigen + '" "' + Archivoxdelta + '" "' + ArchivoDestino + '"');
+      AStringList.Add(Format('%s', ['xdelta.exe -f -d -s "' + ArchivoOrigen + '" "' + Archivoxdelta + '" "' + ArchivoDestino + '"']));
       AStringList.Add('echo.');
     end;
     AStringList.Add('echo Proceso finalizado.');
@@ -320,7 +320,7 @@ begin
       AStringList.Add('fi');
       AStringList.Add('');
       AStringList.Add('echo "Parcheando el archivo: ' + ArchivoOrigen + '"');
-      AStringList.Add('xdelta3 -f -d -s "' + ArchivoOrigen + '" "' + Archivoxdelta + '" "' + ArchivoDestino + '"');
+      AStringList.Add(Format('%s', ['xdelta3 -f -d -s "' + ArchivoOrigen + '" "' + Archivoxdelta + '" "' + ArchivoDestino + '"']));
       AStringList.Add('');
     end;
     AStringList.Add('echo "Proceso finalizado."');
