@@ -207,17 +207,20 @@ procedure Ejecutarxdelta;
 var
   b, i, n: integer;
   buffer, parametros: String;
+  CheckBoxChecked, LabelVisible: boolean;
 begin
   n := 0;
   b := StrToInt(Form1.Buffer_ComboBox.Text) * 1048576;
   buffer := '-B' + IntToStr(b);
+  CheckBoxChecked := Form1.xdeltaFileNames_CheckBox.Checked;
+  LabelVisible := Form1.xdeltaFileNamesDestino_Label.Visible;
   for i := 0 to Form1.Origen_ListBox.Items.Count - 1 do
   begin
     ArchivoOrigen := Form1.Origen_ListBox.Items.Strings[i];
     ArchivoDestino := Form1.Destino_ListBox.Items.Strings[i];
-    case Form1.xdeltaFileNames_CheckBox.Checked of
+    case CheckBoxChecked of
       True: begin
-              case Form1.xdeltaFileNamesDestino_Label.Visible of
+              case LabelVisible of
                 True: Archivoxdelta := RutaParche + ExtractFileNameOnly(ArchivoDestino) + '.xdelta';
                 False: Archivoxdelta := RutaParche + ExtractFileNameOnly(ArchivoOrigen) + '.xdelta';
               end;
@@ -237,22 +240,25 @@ procedure CrearBatch;
 var
   AStringList: TStringList;
   i, n: integer;
+  CheckBoxChecked, LabelVisible: boolean;
 begin
   n := 0;
   try
+    CheckBoxChecked := Form1.xdeltaFileNames_CheckBox.Checked;
+    LabelVisible := Form1.xdeltaFileNamesDestino_Label.Visible;
     AStringList := TStringList.Create;
     AStringList.Add('@echo off');
     //AStringList.Add('chcp 1252>NUL');
     AStringList.Add('chcp 65001>NUL');
     AStringList.Add('echo Archivo generado con PatchMe' + GetAppVersion);
     AStringList.Add('echo.');
-    for i := 0 to Form1.Origen_ListBox.items.count - 1 do
+    for i := 0 to Form1.Origen_ListBox.Items.Count - 1 do
     begin
       ArchivoOrigen := ExtractFileName(Form1.Origen_ListBox.Items.Strings[i]);
       ArchivoDestino := ExtractFileName(Form1.Destino_ListBox.Items.Strings[i]);
-      case Form1.xdeltaFileNames_CheckBox.Checked of
+      case CheckBoxChecked of
       True: begin
-              case Form1.xdeltaFileNamesDestino_Label.Visible of
+              case LabelVisible of
                 True: Archivoxdelta := ExtractFileNameOnly(ArchivoDestino) + '.xdelta';
                 False: Archivoxdelta := ExtractFileNameOnly(ArchivoOrigen) + '.xdelta';
               end;
@@ -286,9 +292,12 @@ procedure CrearSh;
 var
   AStringList: TStringList;
   i, n: integer;
+  CheckBoxChecked, LabelVisible: boolean;
 begin
   n := 0;
   try
+    CheckBoxChecked := Form1.xdeltaFileNames_CheckBox.Checked;
+    LabelVisible := Form1.xdeltaFileNamesDestino_Label.Visible;
     AStringList := TStringList.Create;
     AStringList.Add('#!/usr/bin/env bash');
     AStringList.Add('');
@@ -302,9 +311,9 @@ begin
     begin
       ArchivoOrigen := ExtractFileName(Form1.Origen_ListBox.Items.Strings[i]);
       ArchivoDestino := ExtractFileName(Form1.Destino_ListBox.Items.Strings[i]);
-      case Form1.xdeltaFileNames_CheckBox.Checked of
+      case CheckBoxChecked of
         True: begin
-                case Form1.xdeltaFileNamesDestino_Label.Visible of
+                case LabelVisible of
                   True: Archivoxdelta := ExtractFileNameOnly(ArchivoDestino) + '.xdelta';
                   False: Archivoxdelta := ExtractFileNameOnly(ArchivoOrigen) + '.xdelta';
                 end;
@@ -339,16 +348,19 @@ procedure ComprimirArchivos;
 var
   i, n: integer;
   AZipper: TZipFile;
+  CheckBoxChecked, LabelVisible: boolean;
 begin
   n := 0;
   try
+    CheckBoxChecked := Form1.xdeltaFileNames_CheckBox.Checked;
+    LabelVisible := Form1.xdeltaFileNamesDestino_Label.Visible;
     AZipper := TZipFile.Create;
     AZipper.Open(RutaParche + NombreParche + '.zip', zmWrite);
     for i := 0 to Form1.Origen_ListBox.items.count - 1 do
     begin
-      case Form1.xdeltaFileNames_CheckBox.Checked of
+      case CheckBoxChecked of
         True: begin
-                case Form1.xdeltaFileNamesDestino_Label.Visible of
+                case LabelVisible of
                   True: Archivoxdelta := ExtractFileNameOnly(Form1.Destino_ListBox.Items.Strings[i]) + '.xdelta';
                   False: Archivoxdelta := ExtractFileNameOnly(Form1.Origen_ListBox.Items.Strings[i]) + '.xdelta';
                 end;
@@ -373,13 +385,16 @@ end;
 procedure BorrarArchivos;
 var
   i, n: integer;
+  CheckBoxChecked, LabelVisible: boolean;
 begin
   n := 0;
+  CheckBoxChecked := Form1.xdeltaFileNames_CheckBox.Checked;
+  LabelVisible := Form1.xdeltaFileNamesDestino_Label.Visible;
   for i := 0 to Form1.Origen_ListBox.items.count - 1 do
   begin
-    case Form1.xdeltaFileNames_CheckBox.Checked of
+    case CheckBoxChecked of
       True: begin
-              case Form1.xdeltaFileNamesDestino_Label.Visible of
+              case LabelVisible of
                 True: Archivoxdelta := ExtractFileNameOnly(Form1.Destino_ListBox.Items.Strings[i]) + '.xdelta';
                 False: Archivoxdelta := ExtractFileNameOnly(Form1.Origen_ListBox.Items.Strings[i]) + '.xdelta';
               end;
