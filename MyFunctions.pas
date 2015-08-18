@@ -43,8 +43,8 @@ var
          Result:= ' '+
          IntToStr (HiWord (dwFileVersionMS)) + '.' +
          IntToStr (LoWord (dwFileVersionMS)) + '.' +
-         IntToStr (HiWord (dwFileVersionLS)) + '.' +
-         IntToStr (LoWord (dwFileVersionLS));
+         IntToStr (HiWord (dwFileVersionLS));{ + '.' +
+         IntToStr (LoWord (dwFileVersionLS));}
        end;
      finally
      FreeMem (Pt);

@@ -56,16 +56,12 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <VerInfo_Build>8</VerInfo_Build>
-        <VerInfo_Release>6</VerInfo_Release>
-        <VerInfo_MajorVer>0</VerInfo_MajorVer>
-        <VerInfo_MinorVer>9</VerInfo_MinorVer>
         <DCC_ExeOutput>C:\Users\poxitron\Desktop\$(Config)</DCC_ExeOutput>
         <DCC_DcuOutput>C:\Users\poxitron\Desktop\$(Config)\Unit</DCC_DcuOutput>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_Locale>1034</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=0.9.6.8;InternalName=PatchMe;LegalCopyright=Copyright © 2014, poxitron;LegalTrademarks=;OriginalFilename=PatchMe.exe;ProductName=PatchMe;ProductVersion=0.9.6.8;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=PatchMe;LegalCopyright=Copyright © 2014, poxitron;LegalTrademarks=;OriginalFilename=PatchMe.exe;ProductName=PatchMe;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <DCC_UsePackage>bindcompfmx;DBXSqliteDriver;RESTBackendComponents;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;tethering;bindcomp;inetdb;DBXInterBaseDriver;xmlrtl;svnui;DbxCommonDriver;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;MetropolisUILiveTile;soaprtl;vclactnband;bindengine;vcldb;bindcompdbx;vcldsnap;bindcompvcl;vclie;vcltouch;emsclient;CustomIPTransport;vclribbon;VclSmp;dsnap;IndyIPServer;VCLRESTComponents;fmxase;vcl;IndyCore;IndyIPCommon;CloudService;PJDropFiles;dsnapcon;inet;fmxobj;soapserver;soapmidas;vclx;inetdbxpress;svn;dsnapxml;fmxdae;RESTComponents;adortl;dbexpress;IndyIPClient;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
@@ -140,13 +136,13 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\PatchMe.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\..\Desktop\Debug\PatchMe.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>PatchMe.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\..\..\Desktop\Debug\PatchMe.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\PatchMe.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>PatchMe.exe</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -475,14 +471,14 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>
