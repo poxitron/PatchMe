@@ -24,3 +24,7 @@ añadir y guardar los archivos se guardarán al cerrar la aplicación.
 - `Borrar los archivos intermedios:` Los archivos generados se borrarán después de comprimirse en .zip, evitando así tener que hacerlo manualmente.
 - `Usar nombre para .xdelta:` Si está desactivado, los archivos .xdelta tendrán el nombre "fileX.xdelta", donde X es un número. Si está activado, el nombre de los archivos será el mismo que el de los archivos de origen o destino.
 - `Búfer:` Especifica el "horizonte" máximo por el que xdelta buscará diferencias entre los dos archivos. Para una información más detallada, visita este [enlace] (https://github.com/jmacd/xdelta/blob/wiki/TuningMemoryBudget.md).
+
+
+##### Problemas conocidos #####
+xdelta3 solo soporta nombres de archivo que utilicen la codificación de caracteres Windows-1252.
