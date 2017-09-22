@@ -1,5 +1,5 @@
 ### PatchMe ###
-PatchMe es un sencillo interfaz gráfico para Windows que utiliza [xdelta3] (https://github.com/jmacd/xdelta) para crear parches para más de un archivo a la vez, y ha sido creado por un tipo que no tiene ni idea de programación. ¡Huid, insensatos!
+PatchMe es un sencillo interfaz gráfico para Windows que utiliza [xdelta3](https://github.com/jmacd/xdelta) para crear parches para más de un archivo a la vez, y ha sido creado por un tipo que no tiene ni idea de programación. ¡Huid, insensatos!
 
 ![Screenshot](Resources/screenshot.png)
 
@@ -23,7 +23,7 @@ añadir y guardar los archivos se guardarán al cerrar la aplicación.
 - `Comprimir archivos en zip:` Todos los archivos generados se comprimirán en un archivo .zip al terminar el proceso.
 - `Borrar los archivos intermedios:` Los archivos generados se borrarán después de comprimirse en .zip, evitando así tener que hacerlo manualmente.
 - `Usar nombre para .xdelta:` Si está desactivado, los archivos .xdelta tendrán el nombre "fileX.xdelta", donde X es un número. Si está activado, el nombre de los archivos será el mismo que el de los archivos de origen o destino.
-- `Búfer:` Especifica el "horizonte" máximo por el que xdelta buscará diferencias entre los dos archivos. Para una información más detallada, visita este [enlace] (https://github.com/jmacd/xdelta/blob/wiki/TuningMemoryBudget.md).
+- `Búfer:` Especifica el "horizonte" máximo por el que xdelta buscará diferencias entre los dos archivos. Para una información más detallada, visita este [enlace](https://github.com/jmacd/xdelta/blob/wiki/TuningMemoryBudget.md).
 
 
 ##### Problemas conocidos #####
